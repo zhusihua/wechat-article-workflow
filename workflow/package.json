@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mermaid": "12.2.0",
+    "playwright": "1.62.1"
+  },
+  "name": "wechat-article-workflow-tools",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  }
+}

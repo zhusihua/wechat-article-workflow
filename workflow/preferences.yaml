@@ -1,0 +1,19 @@
+version: 1
+audience: 关注技术、AI、金融与收入机会的程序员及知识工作者
+voice: 短句、直接、具体；观点有依据，保留条件与未知项，不编造个人经历
+desired_length: 1200–2200 字，按主题调整
+theme: professional-clean
+references:
+  display_in_article: false
+  internal_source_ledger: true
+  attribution: 纯文字保留必要归因与限定，不展示参考链接或参考资料列表
+cover:
+  aspect: "2.35:1"
+  square_required: true
+  square_aspect: "1:1"
+  square_text: 短标题与大主体，独立重排，保证缩略图可读性
+  backend: auto
+  palette: 中性浅色背景，绿色 #0FDC78 强调
+  text: title-only
+illustrations: 按解释需要添加，不按固定数量凑图
+delivery: local

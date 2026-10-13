@@ -1,0 +1,24 @@
+# Local installation and state
+workflow/.venv/
+workflow/node_modules/
+workflow/runtime.json
+workflow/runtime.previous.json
+workflow/state/
+**/__pycache__/
+**/.pytest_cache/
+**/*.egg-info/
+**/.DS_Store
+.env
+.env.*
+*.pem
+*.key
+# Per-article/private workspace material
+articles/
+brand/
+.qa/
+project-architecture.html
+# Upstream pinned snapshots are restored and verified by bootstrap
+projects/*
+!projects/SOURCES.json
+# Existing personal research documents are not repository content
+/*2026-10-08*

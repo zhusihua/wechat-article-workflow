@@ -1,0 +1,26 @@
+[
+  {
+    "name": "wewrite",
+    "repository": "https://github.com/imraywang/wewrite",
+    "commit": "95f4d507fb789c695c61cdf0d54bd1ee0fcfd117",
+    "files": 115,
+    "bytes": 3715270,
+    "method": "raw.githubusercontent.com snapshot; verified against Git blob SHA-1"
+  },
+  {
+    "name": "Humanizer-zh",
+    "repository": "https://github.com/op7418/Humanizer-zh",
+    "commit": "f4518a8eab97b8bfebc66a89d34320a89bef6930",
+    "files": 9,
+    "bytes": 39473,
+    "method": "raw.githubusercontent.com snapshot; verified against Git blob SHA-1"
+  },
+  {
+    "name": "baoyu-skills",
+    "repository": "https://github.com/JimLiu/baoyu-skills",
+    "commit": "1567581c26ec29f4216c6e6835415bf30343b0e3",
+    "files": 921,
+    "bytes": 32693068,
+    "method": "raw.githubusercontent.com snapshot; verified against Git blob SHA-1"
+  }
+]

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__ · 公众号预览</title>
+<style>
+:root{color-scheme:light dark;--bg:#f1f4f2;--panel:#fff;--fg:#182b21;--muted:#53675b;--line:#dbe3dd;--accent:#0fdc78}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.7}
+.workspace{max-width:1040px;margin:28px auto;padding:0 20px;display:grid;grid-template-columns:320px minmax(0,1fr);gap:24px;align-items:start}
+.controls{background:var(--panel);border:1px solid var(--line);padding:24px;border-radius:16px;position:sticky;top:24px}
+.controls h1{font-size:23px;line-height:1.45;margin:0 0 16px;overflow-wrap:anywhere}.controls p{color:var(--muted);margin:12px 0;font-size:15px}.status{font-size:14px;border-left:4px solid var(--accent);padding-left:12px;margin-bottom:20px}
+.cover{width:100%;display:block;border-radius:9px;margin:14px 0}.actions{display:grid;gap:10px;margin:20px 0}button,.download{border:1px solid var(--line);padding:12px 16px;border-radius:9px;font:inherit;font-size:16px;font-weight:600;background:var(--panel);color:var(--fg);cursor:pointer;text-decoration:none;text-align:center}button.primary{background:var(--accent);color:#073c22;border-color:var(--accent)}button:hover,.download:hover{filter:brightness(.95)}
+.phone{width:100%;max-width:440px;margin:0 auto;background:white;color:#333;border:1px solid var(--line);border-radius:16px;overflow:hidden}.article-header{padding:28px 20px 0}.article-header h2{margin:0;font-size:24px;line-height:1.45;font-weight:700;overflow-wrap:anywhere}.article-header p{color:#78857c;font-size:14px;margin:14px 0}#article{padding:4px 20px 26px;overflow-wrap:anywhere}#article img{max-width:100%;height:auto}#article table{table-layout:fixed}#article th,#article td{overflow-wrap:anywhere;padding:9px 8px!important;font-size:14px!important}#article pre{overflow-x:auto;max-width:100%}#message{min-height:26px;color:var(--muted);font-size:14px}
+@media(prefers-color-scheme:dark){:root{--bg:#101a14;--panel:#19281f;--fg:#e0ede5;--muted:#b0c7b9;--line:#354b3e}}
+@media(max-width:720px){.workspace{grid-template-columns:minmax(0,1fr);margin:16px auto;padding:0 12px;gap:16px}.controls{position:static;padding:20px}.phone{max-width:440px}.controls h1{font-size:22px}}
+</style>
+</head>
+<body>
+<main class="workspace">
+<aside class="controls">
+<h1>__TITLE__</h1>
+<div class="status">__STATUS__</div>
+__COVER__
+<p>摘要：<span id="digest">__DIGEST__</span></p>
+<div class="actions">
+<button class="primary" id="copy-body">复制排版正文</button>
+<button id="copy-title">复制标题</button>
+<button id="copy-digest">复制摘要</button>
+<a class="download" href="publish.zip" download>下载发表文件包</a>
+</div>
+<p>在公众号编辑器新建图文，粘贴正文，设置标题、摘要和封面。__IMAGE_NOTE__</p>
+<p>右侧是本地排版预览。发表前以公众号后台预览和手机效果为准。</p>
+<div id="message" role="status" aria-live="polite"></div>
+</aside>
+<section class="phone">
+<header class="article-header"><h2>__TITLE__</h2><p>公众号文章 · 本地预览</p></header>
+<section id="article">__BODY__</section>
+</section>
+</main>
+<script>
+const article = document.getElementById('article');
+const title = document.querySelector('.controls h1').textContent;
+const digest = document.getElementById('digest').textContent;
+function notify(s){ document.getElementById('message').textContent = s; }
+async function copy(html, text){
+  try {
+    if (navigator.clipboard?.write && window.ClipboardItem) {
+      const payload = {'text/plain':new Blob([text],{type:'text/plain'})};
+      if (html) payload['text/html'] = new Blob([html],{type:'text/html'});
+      await navigator.clipboard.write([new ClipboardItem(payload)]);
+      return;
+    }
+  } catch (_) {}
+  const temp = document.createElement('section');
+  temp.style.cssText = 'position:fixed;left:-10000px;top:0;';
+  if (html) temp.innerHTML = html; else temp.textContent = text;
+  document.body.appendChild(temp);
+  const selection = window.getSelection();
+  const range = document.createRange(); range.selectNodeContents(temp);
+  selection.removeAllRanges(); selection.addRange(range);
+  const listener = event => { event.preventDefault(); if(html)event.clipboardData.setData('text/html',html);event.clipboardData.setData('text/plain',text); };
+  document.addEventListener('copy',listener,{once:true});
+  const ok = document.execCommand('copy');
+  document.removeEventListener('copy',listener); selection.removeAllRanges();temp.remove();
+  if(!ok)throw new Error('copy failed');
+}
+document.getElementById('copy-body').onclick = async()=>{try{await copy(article.innerHTML,article.innerText);notify('已复制排版正文；粘贴后检查正文图片。');}catch(_){notify('浏览器未允许复制，请选中正文手动复制。');}};
+document.getElementById('copy-title').onclick = async()=>{try{await copy('',title);notify('已复制标题');}catch(_){notify('请手动复制上方标题');}};
+document.getElementById('copy-digest').onclick = async()=>{try{await copy('',digest);notify('已复制摘要');}catch(_){notify('请手动复制上方摘要');}};
+</script>
+</body>
+</html>

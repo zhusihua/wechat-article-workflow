@@ -1,0 +1,25 @@
+name: Workflow checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Browser system dependencies
+        run: |
+          npm ci --prefix workflow
+          node workflow/node_modules/playwright/cli.js install-deps chromium
+      - name: Install
+        run: python scripts/bootstrap.py
+      - name: Unit and integration tests
+        run: workflow/.venv/bin/python -m pytest workflow/test_workflow.py workflow/test_portability.py projects/wewrite/tests/test_converter.py -q
+      - name: Render and package smoke test
+        run: workflow/.venv/bin/python scripts/smoke_article.py

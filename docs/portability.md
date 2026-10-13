@@ -15,7 +15,9 @@
 - macOS / Python 3.14.5 / Node 24.10.0：干净目录中完成独立安装；已有 Chrome 和自动下载 Chromium 两条路径均通过浏览器与 Mermaid 冒烟检查。
 - 新环境更新到 Soup Sieve 3.0.2 后，91 项测试再次通过；合成文章可渲染 Mermaid PNG，且双封面进入 ZIP。
 
-未做其他 Agent 的真实写作试跑，未做 Windows / Linux 的本机验收，未调用真实公众号草稿接口，未公开发表文章。仓库 CI 将验证 Linux 环境；只有实际运行通过才能补充为已验证。
+- Linux / Python 3.11 / Node 22：GitHub Actions 已通过安装、单元与集成测试、Mermaid 渲染、双封面打包和预览检查。验证记录：[首次成功 CI](https://github.com/zhusihua/wechat-article-workflow/actions/runs/38422880467)，对应代码 commit `7fa60c6`。
+
+未做其他 Agent 的真实写作试跑，未做 Windows 验收，未调用真实公众号草稿接口，未公开发表文章。跨系统工具链通过不等于不同模型的写作与事实核查质量相同。
 
 ## 数据与凭据
 

@@ -6,7 +6,7 @@
 
 ## 给其他 Agent 的一句话
 
-> 请读取 https://github.com/zhusihua/wechat-article-workflow 的 README.md，按其中的 Agent 接入流程安装并检查环境，然后读取 workflow/skills/wechat-article-workflow/SKILL.md，用这套流程把我们刚才讨论的内容制作成公众号文章；直接完成能完成的步骤，缺少生图等能力时明确指出，不用占位图冒充完成。
+> 请读取 https://github.com/zhusihua/wechat-article-workflow 的 README，按接入流程安装并检查环境，再使用仓库中的 wechat-article-workflow，把我们刚才讨论的内容制作成公众号文章，交付终稿、双封面、必要配图、可复制预览和发表包；缺少生图等能力时明确说明，不用占位内容冒充完成。
 
 将上面这句话直接交给目标 Agent。首次安装需要联网；目标 Agent 需要文件读写、命令执行、联网研究和图片查看能力，完整封面交付还需要可用的生图工具。“一句话”是任务入口，不代表能绕过目标环境的权限、登录或缺失能力。
 
